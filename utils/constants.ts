@@ -1,6 +1,6 @@
 import * as Web3 from "@solana/web3.js"
 
-// address at which the swap pool is deployed
+// address at which the swap pool is deployed, owner of token swap state account should be program_id
 export const tokenSwapStateAccount = new Web3.PublicKey("EV7FEEq2EyTFtKx4ukp2QfW9mWLGcJckGGBNp5cjcHUe")
 
 // mint authority of LP tokens in the pool. It is a PDA account using seed as `tokenSwapStateAccount` and owner of token-A ATA & token-B ATA pool's accounts to store the token-A and token-B tokens.
