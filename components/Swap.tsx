@@ -116,6 +116,8 @@ export const SwapToken: FC = () => {
             transaction.add(instruction)
         }
 
+        console.log("swapAuthority => ", swapAuthority.toBase58());
+
         try {
             let txid = await sendTransaction(transaction, connection)
             alert(

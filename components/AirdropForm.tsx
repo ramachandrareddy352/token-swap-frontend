@@ -1,21 +1,9 @@
-import {
-    Box,
-    Button,
-    FormControl,
-    FormLabel,
-    NumberInput,
-    NumberInputField,
-} from "@chakra-ui/react"
+import { Box, Button, FormControl, FormLabel, NumberInput, NumberInputField,} from "@chakra-ui/react"
 import { FC, useState } from "react"
 import * as Web3 from "@solana/web3.js"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { AirdropSchema } from "../models/Airdrop"
-import {
-    kryptMint,
-    ScroogeCoinMint,
-    airdropPDA,
-    airdropProgramId,
-} from "../utils/constants"
+import { kryptMint, ScroogeCoinMint, airdropPDA, airdropProgramId,} from "../utils/constants"
 import * as token from "@solana/spl-token"
 
 export const Airdrop: FC = () => {
@@ -44,13 +32,12 @@ export const Airdrop: FC = () => {
         let account = await connection.getAccountInfo(userATA)
 
         if (account == null) {
-            const createATAIX =
-                await token.createAssociatedTokenAccountInstruction(
-                    publicKey,
-                    userATA,
-                    publicKey,
-                    kryptMint
-                )
+            const createATAIX = token.createAssociatedTokenAccountInstruction(
+                publicKey,
+                userATA,
+                publicKey,
+                kryptMint
+            )
             transaction.add(createATAIX)
         }
 
@@ -92,12 +79,8 @@ export const Airdrop: FC = () => {
 
         try {
             let txid = await sendTransaction(transaction, connection)
-            alert(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-            )
-            console.log(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-            )
+            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
+            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
         } catch (e) {
             console.log(JSON.stringify(e))
             alert(JSON.stringify(e))
@@ -124,13 +107,12 @@ export const Airdrop: FC = () => {
         let account = await connection.getAccountInfo(userATA)
 
         if (account == null) {
-            const createATAIX =
-                await token.createAssociatedTokenAccountInstruction(
-                    publicKey,
-                    userATA,
-                    publicKey,
-                    ScroogeCoinMint
-                )
+            const createATAIX = token.createAssociatedTokenAccountInstruction(
+                publicKey,
+                userATA,
+                publicKey,
+                ScroogeCoinMint
+            )
             transaction.add(createATAIX)
         }
 
@@ -172,12 +154,8 @@ export const Airdrop: FC = () => {
 
         try {
             let txid = await sendTransaction(transaction, connection)
-            alert(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-            )
-            console.log(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-            )
+            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
+            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
         } catch (e) {
             console.log(JSON.stringify(e))
             alert(JSON.stringify(e))

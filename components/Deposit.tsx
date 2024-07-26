@@ -1,11 +1,4 @@
-import {
-    Box,
-    Button,
-    FormControl,
-    FormLabel,
-    NumberInput,
-    NumberInputField,
-} from "@chakra-ui/react"
+import { Box, Button, FormControl, FormLabel, NumberInput, NumberInputField, } from "@chakra-ui/react"
 import { FC, useState } from "react"
 import * as Web3 from "@solana/web3.js"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
@@ -43,11 +36,11 @@ export const DepositSingleTokenType: FC = (props: {
 
         const poolMintInfo = await token.getMint(connection, poolMint)
 
-        const kryptATA = await token.getAssociatedTokenAddress(
+        const mykryptATA = await token.getAssociatedTokenAddress(
             kryptMint,
             publicKey
         )
-        const scroogeATA = await token.getAssociatedTokenAddress(
+        const myscroogeATA = await token.getAssociatedTokenAddress(
             ScroogeCoinMint,
             publicKey
         )
@@ -61,13 +54,12 @@ export const DepositSingleTokenType: FC = (props: {
         let account = await connection.getAccountInfo(tokenAccountPool)
 
         if (account == null) {
-            const createATAInstruction =
-                token.createAssociatedTokenAccountInstruction(
-                    publicKey,
-                    tokenAccountPool,
-                    publicKey,
-                    poolMint
-                )
+            const createATAInstruction = token.createAssociatedTokenAccountInstruction(
+                publicKey,
+                tokenAccountPool,
+                publicKey,
+                poolMint
+            )
             transaction.add(createATAInstruction)
         }
 
@@ -75,8 +67,8 @@ export const DepositSingleTokenType: FC = (props: {
             tokenSwapStateAccount,
             swapAuthority,
             publicKey,
-            kryptATA,
-            scroogeATA,
+            mykryptATA,
+            myscroogeATA,
             poolKryptAccount,
             poolScroogeAccount,
             poolMint,
@@ -91,12 +83,8 @@ export const DepositSingleTokenType: FC = (props: {
         transaction.add(instruction)
         try {
             let txid = await sendTransaction(transaction, connection)
-            alert(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-            )
-            console.log(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-            )
+            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
+            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
         } catch (e) {
             console.log(JSON.stringify(e))
             alert(JSON.stringify(e))
